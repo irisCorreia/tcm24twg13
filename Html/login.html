@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Eat Around</title>
+    <link rel="stylesheet" href="../CSS/login.css" />
+    <script src="components/loadHeader.js"></script>
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+
+    <main>
+
+      <section class="login-form">
+        <h2>Bem-vindo ao Eat Around</h2>
+        <form>
+          <div class="input-container">
+            <input type="text" placeholder="Username" required />
+          </div>
+          <div class="input-container">
+            <input type="password" placeholder="Password" required />
+          </div>
+          <button type="submit">Entrar</button>
+        </form>
+        <p>
+          <a href="../HTML/index.html" class="back-link"
+            >Voltar para a página inicial</a
+          >
+        </p>
+      </section>
+    </main>
+
+    <footer id="footer"></footer>
+
+
+
+    <script>
+      // Função para a barra de pesquisa
+      document
+        .querySelector(".search-bar")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const query = this.querySelector("input").value.toLowerCase().trim();
+        });
+    </script>
+  </body>
+</html>

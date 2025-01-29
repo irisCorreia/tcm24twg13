@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurantes de Portugal</title>
+    <link rel="stylesheet" href="../CSS/restaurantespaises.css" />
+    <script src="components/loadHeader.js"></script>
+  </head>
+  
+  <body>
+    <div id="header-placeholder"></div>
+
+
+    <main>
+      <h1>Restaurantes de Portugal</h1>
+
+      <section class="filters">
+        <h2>Filtros</h2>
+        <label for="localizacao">Localização:</label>
+        <select id="localizacao">
+          <option value="todos">Todos</option>
+          <option value="Algarve">Algarve</option>
+          <option value="Lisboa">Lisboa</option>
+          <option value="Porto">Porto</option>
+        </select>
+
+        <label for="preco">Preço:</label>
+        <select id="preco">
+          <option value="todos">Todos</option>
+          <option value="Baixo">Preço Baixo</option>
+          <option value="Médio">Preço Médio</option>
+          <option value="Alto">Preço Alto</option>
+        </select>
+
+        <label for="pontuacao">Pontuação:</label>
+        <select id="pontuacao">
+          <option value="todas">Todas</option>
+          <option value="Baixa">Baixa</option>
+          <option value="Média">Média</option>
+          <option value="Alta">Alta</option>
+        </select>
+      </section>
+
+      <section>
+        <h2>Lista de Restaurantes</h2>
+        <div id="restaurantes-lista"></div>
+      </section>
+    </main>
+
+       <footer id="footer"></footer>
+
+
+    <script>
+      const restaurantes = [
+        {
+          nome: "Inevitavel",
+          imagem: "../IMAGENS/inevitavel3.jpg",
+          localizacao: "Algarve",
+          preco: "Alto",
+          pontuacao: "Alta",
+          link: "../HTML/inevitavel.html",
+        },
+        {
+          nome: "O Charneco",
+          imagem: "../IMAGENS/charneco4.jpg",
+          localizacao: "Algarve",
+          preco: "Médio",
+          pontuacao: "Alta",
+          link: "../HTML/charneco.html",
+        },
+        {
+          nome: "Loki",
+          imagem: "../IMAGENS/loki2.jpg",
+          localizacao: "Algarve",
+          preco: "Alto",
+          pontuacao: "Alta",
+          link: "../HTML/loki.html",
+        },
+        {
+          nome: "Ato Gastronômico",
+          imagem: "../IMAGENS/restaurant2.jpg",
+          localizacao: "Lisboa",
+          preco: "Alto",
+          pontuacao: "Alta",
+          link: "../HTML/ato_gastronomico.html",
+        },
+        {
+          nome: "Marlene",
+          imagem: "../IMAGENS/marlene4.jpg",
+          localizacao: "Lisboa",
+          preco: "Alto",
+          pontuacao: "Média",
+          link: "../HTML/marlene.html",
+        },
+        {
+          nome: "Zé do Cozido",
+          imagem: "../IMAGENS/restaurant1.jpg",
+          localizacao: "Lisboa",
+          preco: "Médio",
+          pontuacao: "Média",
+          link: "../HTML/ze.html",
+        },
+        {
+          nome: "Liz",
+          imagem: "../IMAGENS/liz2.jpg",
+          localizacao: "Porto",
+          preco: "Alto",
+          pontuacao: "Alta",
+          link: "../HTML/liz.html",
+        },
+        {
+          nome: "O Loureiro",
+          imagem: "../IMAGENS/loureiro10.jpg",
+          localizacao: "Porto",
+          preco: "Médio",
+          pontuacao: "Média",
+          link: "../HTML/loureiro.html",
+        },
+        {
+          nome: "Lá de Casa",
+          imagem: "../IMAGENS/ladecasa1.jpg",
+          localizacao: "Porto",
+          preco: "Médio",
+          pontuacao: "Alta",
+          link: "../HTML/ladecasa.html",
+        },
+      ];
+
+      function renderRestaurantes(lista) {
+        const container = document.getElementById("restaurantes-lista");
+        container.innerHTML = "";
+
+        lista.forEach((restaurante) => {
+          const itemHTML = `
+            <div class="restaurant-item">
+              <a href="${restaurante.link}">
+                <img src="${restaurante.imagem}" alt="${restaurante.nome}" width="200" height="150">
+              </a>
+              <p>${restaurante.nome}</p>
+            </div>
+          `;
+          container.innerHTML += itemHTML;
+        });
+      }
+
+      function filtrarRestaurantes() {
+        const localizacao = document.getElementById("localizacao").value;
+        const preco = document.getElementById("preco").value;
+        const pontuacao = document.getElementById("pontuacao").value;
+
+        const filtrados = restaurantes.filter((restaurante) => {
+          return (
+            (localizacao === "todos" ||
+              restaurante.localizacao === localizacao) &&
+            (preco === "todos" || restaurante.preco === preco) &&
+            (pontuacao === "todas" || restaurante.pontuacao === pontuacao)
+          );
+        });
+
+        renderRestaurantes(filtrados);
+      }
+
+      document
+        .getElementById("localizacao")
+        .addEventListener("change", filtrarRestaurantes);
+      document
+        .getElementById("preco")
+        .addEventListener("change", filtrarRestaurantes);
+      document
+        .getElementById("pontuacao")
+        .addEventListener("change", filtrarRestaurantes);
+
+      renderRestaurantes(restaurantes);
+    </script>
+  </body>
+</html>
